@@ -35,8 +35,8 @@
 #include "algorithm_by_RF.h"
 #include "max30102.h"
 
-//#define DEBUG // Uncomment for debug output to the Serial stream
-#define USE_ADALOGGER // Comment out if you don't have ADALOGGER itself but your MCU still can handle this code
+#define DEBUG // Uncomment for debug output to the Serial stream
+//#define USE_ADALOGGER // Comment out if you don't have ADALOGGER itself but your MCU still can handle this code
 //#define TEST_MAXIM_ALGORITHM // Uncomment if you want to include results returned by the original MAXIM algorithm
 //#define SAVE_RAW_DATA // Uncomment if you want raw data coming out of the sensor saved to SD card. Red signal first, IR second.
 
@@ -49,7 +49,7 @@
 #endif
 
 // Interrupt pin
-const byte oxiInt = 10; // pin connected to MAX30102 INT
+const byte oxiInt = 17; // pin connected to MAX30102 INT
 
 // ADALOGGER pins
 #ifdef USE_ADALOGGER
@@ -171,12 +171,15 @@ void setup() {
 
 #else // USE_ADALOGGER
 
-  while(Serial.available()==0)  //wait until user presses a key
+/*  while(Serial.available()==0)  //wait until user presses a key
   {
     Serial.println(F("Press any key to start conversion"));
     delay(1000);
   }
   uch_dummy=Serial.read();
+*/
+  delay(1000);
+
 #ifdef TEST_MAXIM_ALGORITHM
   Serial.print(F("Time[s]\tSpO2\tHR\tSpO2_MX\tHR_MX\tClock\tRatio\tCorr"));
 #else // TEST_MAXIM_ALGORITHM
@@ -396,4 +399,3 @@ void blinkLED(const byte led, bool isOK)
   }
 }
 #endif
-
