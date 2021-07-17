@@ -210,4 +210,3 @@ bool maxim_max30102_reset()
     else
         return true;    
 }
-

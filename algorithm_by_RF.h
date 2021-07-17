@@ -42,7 +42,7 @@
  * and/or sample length would require these paramteres to be adjusted.
  */
 #define ST 4      // Sampling time in s. WARNING: if you change ST, then you MUST recalcuate the sum_X2 parameter below!
-#define FS 25     // Sampling frequency in Hz. WARNING: if you change FS, then you MUST recalcuate the sum_X2 parameter below!
+#define FSAM 25     // Sampling frequency in Hz. WARNING: if you change FS, then you MUST recalcuate the sum_X2 parameter below!
 // Sum of squares of ST*FS numbers from -mean_X (see below) to +mean_X incremented be one. For example, given ST=4 and FS=25,
 // the sum consists of 100 terms: (-49.5)^2 + (-48.5)^2 + (-47.5)^2 + ... + (47.5)^2 + (48.5)^2 + (49.5)^2
 // The sum is symmetrc, so you can evaluate it by multiplying its positive half by 2. It is precalcuated here for enhanced 
@@ -63,8 +63,8 @@ const float min_pearson_correlation = 0.8;
  * Do not touch these! 
  * 
  */
-const int32_t BUFFER_SIZE = FS*ST; // Number of smaples in a single batch
-const int32_t FS60 = FS*60;  // Conversion factor for heart rate from bps to bpm
+const int32_t BUFFER_SIZE = FSAM*ST; // Number of smaples in a single batch
+const int32_t FS60 = FSAM*60;  // Conversion factor for heart rate from bps to bpm
 const int32_t LOWEST_PERIOD = FS60/MAX_HR; // Minimal distance between peaks
 const int32_t HIGHEST_PERIOD = FS60/MIN_HR; // Maximal distance between peaks
 const float mean_X = (float)(BUFFER_SIZE-1)/2.0; // Mean value of the set of integers from 0 to BUFFER_SIZE-1. For ST=4 and FS=25 it's equal to 49.5.
@@ -79,4 +79,3 @@ void rf_initialize_periodicity_search(float *pn_x, int32_t n_size, int32_t *p_la
 void rf_signal_periodicity(float *pn_x, int32_t n_size, int32_t *p_last_periodicity, int32_t n_min_distance, int32_t n_max_distance, float min_aut_ratio, float aut_lag0, float *ratio);
 
 #endif /* ALGORITHM_BY_RF_H_ */
-

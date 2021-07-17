@@ -93,7 +93,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_i
   int32_t n_th1, n_npks, n_c_min;   
   int32_t an_ir_valley_locs[15] ;
   int32_t n_peak_interval_sum;
-  static int32_t n_last_peak_interval=FS; // Initialize it to 25, which corresponds to heart rate of 60 bps, RF
+  static int32_t n_last_peak_interval=FSAM; // Initialize it to 25, which corresponds to heart rate of 60 bps, RF
   
   int32_t n_y_ac, n_x_ac;
 //  int32_t n_spo2_calc; 
@@ -133,7 +133,7 @@ void maxim_heart_rate_and_oxygen_saturation(uint32_t *pun_ir_buffer, int32_t n_i
   if (n_npks>=2){
     for (k=1; k<n_npks; k++) n_peak_interval_sum += (an_ir_valley_locs[k] - an_ir_valley_locs[k -1] ) ;
     n_peak_interval_sum =n_peak_interval_sum/(n_npks-1);
-    *pn_heart_rate =(int32_t)( (FS*60)/ n_peak_interval_sum );
+    *pn_heart_rate =(int32_t)( (FSAM*60)/ n_peak_interval_sum );
     *pch_hr_valid  = 1;
   }
   else  { 
@@ -315,5 +315,3 @@ void maxim_sort_indices_descend(  int32_t  *pn_x, int32_t *pn_indx, int32_t n_si
     pn_indx[j] = n_temp;
   }
 }
-
-

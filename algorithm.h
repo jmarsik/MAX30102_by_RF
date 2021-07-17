@@ -65,8 +65,8 @@
 
 #define true 1
 #define false 0
-#define FS 25    //sampling frequency
-#define BUFFER_SIZE  (FS* 4) 
+#define FSAM 25    //sampling frequency
+#define BUFFER_SIZE  (FSAM* 4) 
 #define MA4_SIZE  4 // DONOT CHANGE
 #define BUFFER_SIZE_MA4 BUFFER_SIZE-MA4_SIZE
 #define min(x,y) ((x) < (y) ? (x) : (y))
@@ -114,4 +114,3 @@ void maxim_sort_ascend(int32_t  *pn_x, int32_t n_size);
 void maxim_sort_indices_descend(int32_t  *pn_x, int32_t *pn_indx, int32_t n_size);
 
 #endif /* ALGORITHM_H_ */
-
